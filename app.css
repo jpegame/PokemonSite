@@ -1,0 +1,77 @@
+body {
+  margin: 0;
+  background-color: #e24949;
+  font-family: "Press Start 2P", cursive;
+  font-size: 16px;
+  color: #222222;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #801f1f;
+  color: white;
+  padding: 10px;
+}
+
+h1 {
+  text-shadow:
+    1px  1px 2px black,
+    1px -1px 2px black,
+   -1px  1px 2px black,
+   -1px -1px 2px black;
+}
+
+/*Fazendo o elemento ser apresentado inline e centralizado o texto*/
+.gridfoda {
+  margin: 10px;
+  display: grid;
+  grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
+  grid-gap: 10px;
+}
+
+.pokemon {
+  background-color: rgb(106, 180, 245);
+  position: relative;
+  width: 100%;
+  max-width: 50vw;
+  padding-bottom: 100%;
+  border-style: solid;
+}
+
+.pokemon span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Fazendo o elemento ser apresentado em bloco*/
+.pokemon img {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+}
+
+.pokemon img:hover {
+  cursor: pointer;
+}
+
+
+.search-bar input[type="text"] {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 20vw;
+}

@@ -1,0 +1,72 @@
+const baseURL = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/';
+var requestURL = 'https://pokeapi.co/api/v2/pokemon-form/';
+const PopUpBox = document.querySelector('[data-modal]')
+const popupContent = document.getElementById('tipoid');
+let i =0;
+while (i < 151) {
+
+    //Criando um elemento <div>
+    const pokemon = document.createElement('div');
+    pokemon.classList.add('pokemon'); //Adicionando a class pokemon ao div. Ex.: <div class = 'pokemon'></div>                           //A classe pokemon está definida no arquivo app.css
+
+    const rotulo = document.createElement('span');
+    //Colocando o número do pokemon ao no texto do <span> criado.
+    //Criando um elemento <span>
+
+    //Criando um elemento <img>
+    const novaImg = document.createElement('img');
+    novaImg.src = baseURL+(i+1)+".gif"; //Atribuindo o endereço e o nome do arquivo de imagem no atributo src do <img> criado.
+    novaImg.addEventListener("click", function (event) {
+        popupContent.innerHTML = event.target.name
+        PopUpBox.showModal();
+    })
+
+    document.body.appendChild(pokemon);
+    $.ajax({
+        url: requestURL + (i + 1),
+        dataType: 'json',
+        success: async function(response) {
+            // Update the HTML page with the JSON data
+            rotulo.innerText = response.pokemon.name
+            for (let tipo of response.types) {
+                novaImg.name += 'Tipo:' + tipo.type.name + '<br>'
+            }
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+
+    //Adicionando a imagem e o rótulo ao <div> criado
+    pokemon.appendChild(novaImg);
+    pokemon.appendChild(rotulo);
+    document.getElementById('gridmtofoda').appendChild(pokemon)
+    i++;
+}
+
+PopUpBox.addEventListener("click", e => {
+    const dialogDimensions = PopUpBox.getBoundingClientRect()
+    if (
+        e.clientX < dialogDimensions.left ||
+        e.clientX > dialogDimensions.right ||
+        e.clientY < dialogDimensions.top ||
+        e.clientY > dialogDimensions.bottom
+    ) {
+        PopUpBox.close()
+    }
+})
+
+function Foda(){
+    var pesquisa = document.getElementById('mtofoda').value
+    var children = document.getElementById("gridmtofoda").children; //get container element children.
+    for (var i = 0, len = children.length ; i < len; i++) {
+        if (children[i].className == 'pokemon'){
+            if (children[i].children[1].innerHTML.search(pesquisa) == -1){
+                children[i].style = "visibility:hidden; position: absolute;"
+            }
+            else {
+                children[i].style = "visibility:visible; position: relative;"
+            }
+        }
+    }
+}
