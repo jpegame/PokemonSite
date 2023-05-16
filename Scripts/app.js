@@ -2,6 +2,7 @@ const baseURL = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprite
 var requestURL = 'https://pokeapi.co/api/v2/pokemon-form/';
 const PopUpBox = document.querySelector('[data-modal]')
 const popupContent = document.getElementById('tipoid');
+
 function CarregarPokemons(i,i2){
     while (i < i2) {
 
@@ -15,9 +16,11 @@ function CarregarPokemons(i,i2){
 
         //Criando um elemento <img>
         const novaImg = document.createElement('img');
+        novaImg.id = i + 1;
         novaImg.src = baseURL+(i+1)+".gif"; //Atribuindo o endereço e o nome do arquivo de imagem no atributo src do <img> criado.
         novaImg.addEventListener("click", function (event) {
             popupContent.innerHTML = event.target.name
+            document.getElementById('foda').name = 'pokemon=' + event.target.id
             PopUpBox.showModal();
         })
 
@@ -80,4 +83,9 @@ function RecarregarPagina(i,i2){
         box.remove();
     });
     CarregarPokemons(i,i2);
+}
+
+function AbrirFoda() {
+    let parametro = document.getElementById('foda').name
+    window.location.href = '../templates/foda.html?' + parametro
 }

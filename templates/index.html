@@ -5,11 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Pokedex brabo</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <link rel="stylesheet" href="app.css">
+        <link rel="stylesheet" href="../style/app.css">
     </head>
     <body>
         <header>
-            <h1>Pokedex braba do homi</h1>
+            <h1 id="headerfoda">Pokedex braba do homi</h1>
             <nav>
                 <a onclick="RecarregarPagina(0,151)">Kanto</a>
                 <a onclick="RecarregarPagina(151,251)">Johto</a>
@@ -29,7 +29,8 @@
         <dialog data-modal>
             <h2>Tipo do Pokemon</h2>
             <p id="tipoid"></p>
+            <button name = 'fodinha' id="foda" onclick="AbrirFoda()" >Ver pokemon</button>
         </dialog>
-        <script src="app.js"></script>
+        <script src="../Scripts/app.js"></script>
     </body>
 </html>
