@@ -21,7 +21,7 @@ $.ajax({
     success: async function(response) {
         // Update the HTML page with the JSON data
         document.getElementById('nome_pokemon').innerHTML = response.forms[0].name
-        document.getElementById('image_pokemon').src = response.sprites.front_default
+        document.getElementById('image_pokemon').src = response.sprites.other['official-artwork'].front_default
         let i =0;
         for (let tipo of response.types) {
             tipo_pokemon = document.createElement('h2')
