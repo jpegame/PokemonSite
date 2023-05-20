@@ -18,18 +18,33 @@
     <div class="foda_info">
         <div class="pokemon">
             <span id="nome_pokemon"></span>
-            <img id="image_pokemon">
+            <img id="pokemon_normal">
+            <img id="pokemon_shiny" style="display: none;">
+            <img id="gif_normal" style="display: none;">
+            <img id="gif_shiny" style="display: none;">
+            ]<img id="super_gif" style="display: none;">
         </div>
-        <div id="descricao"></div>
+        <div id="descricao">
+            <fieldset>
+                <legend>Opções de visualização</legend>
+                <label class="container">
+                    <input type="checkbox" id="Shiny" onclick="CheckboxPoke()">
+                    <span class="checkmark"></span>
+                    Versão Shiny
+                </label>
+                <label class="container">
+                    <input type="checkbox" id="Gif" onclick="CheckboxPoke()">
+                    <span class="checkmark"></span>
+                    Versão Gif
+                </label>
+                <label class="container">
+                    <input type="checkbox" id="SuperGif" onclick="CheckboxPoke()">
+                    <span class="checkmark"></span>
+                    Super Gif
+                </label>
+            </fieldset>
+        </div>
     </div>
-    <form>
-        <label>Shiny</label>
-        <input type="checkbox">
-        <label>Gif</label>
-        <input type="checkbox">
-        <label>Costas</label>
-        <input type="checkbox">
-    </form>
     <script src="../Scripts/foda.js"></script>
 </body>
 </html>
