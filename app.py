@@ -18,9 +18,14 @@ def index():
 def pokemon():
     return render_template('foda.html', title = "pokemon")
 
-@app.route('/criar_pokemon')
+@app.route('/criar_pokemon', methods=['GET', 'POST'])
 def criar_pokemon():
-    return render_template('criacao.html', title='Criação')
+    form = CadastroPokemon()
+    if form.validate_on_submit():
+        with open('teste.txt','w') as f:
+            f.write(f'{form.tipo.data} \n {form.nome.data} \n {form.imagem.data}')
+    
+    return render_template('criacao.html', title='Criação',form=form)
 
 if __name__ == '__main__':
     app.run(debug=True)

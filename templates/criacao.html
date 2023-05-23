@@ -1,60 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-    canvas {
-      border: 1px solid black;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokedex braba</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="../static/app.css">
 </head>
 <body>
-  <canvas id="canvas"></canvas>
-  <button id="save-button">save</button>
-  <script>
-  const canvas = document.getElementById('canvas');
-  const context = canvas.getContext('2d');
-  let isDrawing = false;
-  let lastX = 0;
-  let lastY = 0;
-
-  function startDrawing(event) {
-    isDrawing = true;
-    [lastX, lastY] = [event.offsetX, event.offsetY];
-  }
-
-  function draw(event) {
-    if (!isDrawing) return;
-    context.beginPath();
-    context.moveTo(lastX, lastY);
-    context.lineTo(event.offsetX, event.offsetY);
-    context.stroke();
-    [lastX, lastY] = [event.offsetX, event.offsetY];
-  }
-
-  function stopDrawing() {
-    isDrawing = false;
-  }
-
-  function saveDrawing() {
-    const dataURL = canvas.toDataURL();
-    //const link = document.createElement('a');
-    // link.download = 'drawing.txt';
-    // link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(dataURL);
-    // const base64String = "data:image/png;base64,iVBORw0KG...";
-    const img = new Image();
-    img.src = dataURL;//base64String;
-    document.body.appendChild(img);
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    //link.click();
-  }
-
-  canvas.addEventListener('mousedown', startDrawing);
-  canvas.addEventListener('mousemove', draw);
-  canvas.addEventListener('mouseup', stopDrawing);
-  canvas.addEventListener('mouseout', stopDrawing);
-
-  document.getElementById('save-button').addEventListener('click', saveDrawing);
-
-  </script>
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <form method="POST" action="/criar_pokemon" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    {{ form.tipo.label }} {{ form.tipo }}
+    {{ form.nome.label }} {{ form.nome(size=20, placeholder="Nome do produto", autocomplete="off") }}
+    {{ form.imagem.label }} {{ form.imagem(size=1) }}
+    {{ form.submit() }}
+  </form>
+  <script src="{{ url_for('static', filename='criacao.js') }}"></script>
 </body>
 </html>

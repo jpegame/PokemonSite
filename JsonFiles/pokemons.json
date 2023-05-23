@@ -1,3 +1,20 @@
 {
-    "name":""
+    "pokemons": [
+        {
+            "name":"Meu pokemon",
+            "Base64":"afas23582i95wu85235u84tfnkgs",
+            "types":[
+                "fire",
+                "water"
+            ]
+        },
+        {
+            "name":"Meu pokemon2",
+            "Base64":"afas2358w4we2i95wu85235u84tfnkgs",
+            "types":[
+                "fire",
+                "water"
+            ]
+        }
+    ]
 }
