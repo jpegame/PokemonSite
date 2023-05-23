@@ -16,7 +16,6 @@ const pokemon_normal    = document.getElementById('pokemon_normal');
 const pokemon_shiny     = document.getElementById('pokemon_shiny');
 const gif_normal        = document.getElementById('gif_normal');
 const gif_shiny         = document.getElementById('gif_shiny');
-const super_gif         = document.getElementById('super_gif');
 
 pokemonid = GetURLParameter('pokemon')
 requestURL = 'https://pokeapi.co/api/v2/pokemon/' + pokemonid
@@ -29,9 +28,8 @@ $.ajax({
         document.getElementById('nome_pokemon').innerHTML   = response.forms[0].name
         pokemon_normal.src  = response.sprites.other['official-artwork'].front_default
         pokemon_shiny.src   = response.sprites.other['official-artwork'].front_shiny
-        gif_normal.src      = response.sprites.versions['generation-v']['black-white'].animated.front_default
-        gif_shiny.src       = response.sprites.versions['generation-v']['black-white'].animated.front_shiny
-        super_gif.src       = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/' + pokemonid + '.gif'
+        gif_normal.src      = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/' + pokemonid + '.gif'
+        gif_shiny.src       = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/shiny/' + pokemonid + '.gif'
         let i =0;
         for (let tipo of response.types) {
             tipo_pokemon = document.createElement('h2')
@@ -51,15 +49,9 @@ function CheckboxPoke() {
 
     let shinybox = document.getElementById('Shiny').checked
     let gifbox = document.getElementById('Gif').checked
-    let supergifbox = document.getElementById('SuperGif').checked
     ResetPoke()
 
     switch (true) {
-        case (supergifbox):
-            document.getElementById('Shiny').checked = false
-            document.getElementById('Gif').checked = false
-            super_gif.style = 'display: block;'
-            break;
         case (shinybox  && !gifbox):
             pokemon_shiny.style = 'display: block;'
             break;
@@ -80,5 +72,4 @@ function ResetPoke () {
     pokemon_shiny.style     = 'display: none;'
     gif_normal.style        = 'display: none;'
     gif_shiny.style         = 'display: none;'
-    super_gif.style         = 'display: none;'
 }

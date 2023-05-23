@@ -19,9 +19,7 @@ function CarregarPokemons(i,i2){
         novaImg.id = i + 1;
         novaImg.src = baseURL+(i+1)+".gif"; //Atribuindo o endereço e o nome do arquivo de imagem no atributo src do <img> criado.
         novaImg.addEventListener("click", function (event) {
-            popupContent.innerHTML = event.target.name
-            document.getElementById('foda').name = 'pokemon=' + event.target.id
-            PopUpBox.showModal();
+            AbrirFoda(event.target.id);
         })
 
         document.body.appendChild(pokemon);
@@ -31,9 +29,6 @@ function CarregarPokemons(i,i2){
             success: async function(response) {
                 // Update the HTML page with the JSON data
                 rotulo.innerText = response.pokemon.name
-                for (let tipo of response.types) {
-                    novaImg.name += 'Tipo:' + tipo.type.name + '<br>'
-                }
             },
             error: function(error) {
                 console.log(error);
@@ -47,18 +42,6 @@ function CarregarPokemons(i,i2){
         i++;
     }
 }
-
-PopUpBox.addEventListener("click", e => {
-    const dialogDimensions = PopUpBox.getBoundingClientRect()
-    if (
-        e.clientX < dialogDimensions.left ||
-        e.clientX > dialogDimensions.right ||
-        e.clientY < dialogDimensions.top ||
-        e.clientY > dialogDimensions.bottom
-    ) {
-        PopUpBox.close()
-    }
-})
 
 function Foda(){
     var pesquisa = document.getElementById('mtofoda').value
@@ -85,7 +68,7 @@ function RecarregarPagina(i,i2){
     CarregarPokemons(i,i2);
 }
 
-function AbrirFoda() {
-    let parametro = document.getElementById('foda').name
-    window.location.href = '../templates/foda.html?' + parametro
+function AbrirFoda(nomepokemon) {
+    let parametro = nomepokemon
+    window.location.href = '../templates/foda.html?pokemon=' + parametro
 }
