@@ -5,12 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Pokedex brabo</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <link rel="stylesheet" href="../style/app.css">
+        <link rel="stylesheet" href="../static/app.css">
     </head>
     <body>
         <header>
             <h1 id="headerfoda">Pokedex braba do homi</h1>
             <nav>
+                <a href="{{ url_for('criar_pokemon') }}">Criar Pokemon</a>
                 <a onclick="RecarregarPagina(0,151)">Kanto</a>
                 <a onclick="RecarregarPagina(151,251)">Johto</a>
                 <a onclick="RecarregarPagina(251,386)">Hoenn</a>
@@ -27,6 +28,6 @@
             </div>
         </header>
         <div class="gridfoda" id="gridmtofoda"></div>
-        <script src="../Scripts/app.js"></script>
+        <script src="{{ url_for('static', filename='app.js') }}"></script>
     </body>
 </html>

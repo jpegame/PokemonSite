@@ -70,5 +70,5 @@ function RecarregarPagina(i,i2){
 
 function AbrirFoda(nomepokemon) {
     let parametro = nomepokemon
-    window.location.href = '../templates/foda.html?pokemon=' + parametro
+    window.location.href = "/pokemon?pokemon=" + parametro
 }

@@ -6,13 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Pokedex braba</title>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <link rel="stylesheet" href="../style/app.css">
+        <link rel="stylesheet" href="../static/app.css">
     </head>
 <body>
     <header>
         <h1 id="headerfoda">Pokedex braba do homi</h1>
         <nav>
-            <a href="./index.html">Página principal</a>
+            <a href="{{ url_for('index') }}">Página principal</a>
         </nav>
     </header>
     <div class="foda_info">
@@ -39,6 +39,6 @@
             </fieldset>
         </div>
     </div>
-    <script src="../Scripts/foda.js"></script>
+    <script src="{{ url_for('static', filename='foda.js') }}"></script>
 </body>
 </html>
