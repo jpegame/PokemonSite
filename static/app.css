@@ -244,19 +244,7 @@ label[for='imagem']{
 canvas {
   border: 1px solid black;
 }
-/* Apply some basic styling to the form */
-form {
-  width: 300px;
-  margin: 0 auto;
-}
 
-/* Style the label for the combo box */
-
-/* Style the combo box container */
-.select-container {
-  position: relative;
-  width: 100%;
-}
 
 /* Style the combo box */
 select {
@@ -264,21 +252,15 @@ select {
   height: 150px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  padding: 5px;
+  margin-left: 10px;
+  padding: 10px;
   font-size: 14px;
   color: #333;
   background-color: #f7f7f7;
 }
 
-/* Style the combo box dropdown icon */
-.select-container::after {
-  content: '\25BC';
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  font-size: 14px;
-  color: #555;
+label {
+  margin-left: 10px;
 }
 
 /* Style the submit button */

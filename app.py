@@ -3,9 +3,11 @@ from forms import CadastroPokemon
 import os
 import json
 
+def Load_Jsons(arquivo):
+    with open(arquivo,'r') as f:
+        return json.load(f)
 app = Flask(__name__)
-file_path = './JSONFiles/mercadinho.json'
-carrinho_path = './JSONFiles/carrinho.json'
+pokemons_path = './JSonFiles/pokemons.json'
 
 app.config['SECRET_KEY'] = 'top10senhasfodas'
 app.config['UPLOAD_FOLDER'] = './static/Imagens'
@@ -22,8 +24,16 @@ def pokemon():
 def criar_pokemon():
     form = CadastroPokemon()
     if form.validate_on_submit():
-        with open('teste.txt','w') as f:
-            f.write(f'{form.tipo.data} \n {form.nome.data} \n {form.imagem.data}')
+        pokemons = Load_Jsons(pokemons_path)
+        pokemon_solo = {
+            "id"  : len(pokemons['pokemons']) + 1,
+            "name": form.nome.data,
+            "Base64": form.imagem.data,
+            "types": form.tipo.data
+        }
+        pokemons['pokemons'].append(pokemon_solo)
+        with open(pokemons_path,'w') as f:
+            f.write(json.dumps(pokemons, indent=4))
     
     return render_template('criacao.html', title='Criação',form=form)
 

@@ -8,15 +8,23 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="../static/app.css">
 </head>
-<body>
-  <canvas id="canvas" width="800" height="600"></canvas>
-  <form method="POST" action="/criar_pokemon" enctype="multipart/form-data">
-    {{ form.hidden_tag() }}
-    {{ form.tipo.label }} {{ form.tipo }}
-    {{ form.nome.label }} {{ form.nome(size=20, placeholder="Nome do produto", autocomplete="off") }}
-    {{ form.imagem.label }} {{ form.imagem(size=1) }}
-    {{ form.submit() }}
-  </form>
+<body >
+  <header>
+    <h1 id="headerfoda">Pokedex braba do homi</h1>
+    <nav>
+        <a href="{{ url_for('index') }}">Página principal</a>
+    </nav>
+  </header>
+  <div class="foda_info">
+    <canvas id="canvas" width="350" height="350"></canvas>
+    <form method="POST" action="/criar_pokemon" enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+      {{ form.tipo.label }} {{ form.tipo }}
+      {{ form.nome.label }} {{ form.nome(size=20, placeholder="Nome do pokemon...", autocomplete="off") }}
+      {{ form.imagem.label }} {{ form.imagem(size=1) }}
+      {{ form.submit() }}
+    </form>
+  </div>
   <script src="{{ url_for('static', filename='criacao.js') }}"></script>
 </body>
 </html>
