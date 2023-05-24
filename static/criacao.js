@@ -1,5 +1,10 @@
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
+context.beginPath();
+context.rect(0, 0, 700, 700);
+context.lineWidth = 5;
+context.fillStyle = "white";
+context.fill();
 let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
