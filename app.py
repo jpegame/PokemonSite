@@ -52,5 +52,14 @@ def base64_to_image(base64_string, output_path):
 def pokemon_data():
     return send_file(pokemons_path, mimetype='application/json')
 
+@app.route('/pokemon_data/<id>')
+def pokemon_data_item(id):
+    pokemons = Load_Jsons(pokemons_path)
+    for pokemon_item in pokemons['pokemons']:
+        if pokemon_item['id'] == int(id):
+            return jsonify(pokemon_item=pokemon_item)
+            
+
+
 if __name__ == '__main__':
     app.run(debug=True)

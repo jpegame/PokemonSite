@@ -5,18 +5,16 @@ const popupContent = document.getElementById('tipoid');
 
 function CarregarPokemons(i,i2){
     if (i == null || i2 == null){
-        $(document).ready(function() {
-            $.ajax({
-                url: '/pokemon_data',
-                dataType: 'json',
-                success: function(response) {
-                    // Update the HTML page with the JSON data
-                    LoadPokemons(response);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
+        $.ajax({
+            url: '/pokemon_data',
+            dataType: 'json',
+            success: function(response) {
+                // Update the HTML page with the JSON data
+                LoadPokemons(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
         });
     }else{
         while (i < i2) {
@@ -98,6 +96,11 @@ function LoadPokemons(pokemonlista) {
         const novaImg = document.createElement('img');
         novaImg.id = pokemon.id
         novaImg.src = pokemon.Imagem
+        novaImg.addEventListener("click", function (event) {
+            let parametro = 400000 + Number(event.target.id)
+            window.location.href = "/pokemon?pokemon=" + parametro
+        })
+
         rotulo.innerText = pokemon.name
         pokemondiv.appendChild(novaImg);
         pokemondiv.appendChild(rotulo);
