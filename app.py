@@ -1,17 +1,28 @@
 from flask import Flask, render_template, jsonify, request, send_file, url_for, redirect
 from forms import CadastroPokemon
-import os
+from models import db, type, pokemon as poke
 import json
 import base64
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://joao:joao123@127.0.0.1:3306/PokemonSite'
+app.config['SECRET_KEY'] = 'top10senhasfodas'
+app.config['UPLOAD_FOLDER'] = './static/Imagens'
+
+db.init_app(app)
 
 def Load_Jsons(arquivo):
     with open(arquivo,'r') as f:
         return json.load(f)
-app = Flask(__name__)
-pokemons_path = './JSonFiles/pokemons.json'
 
-app.config['SECRET_KEY'] = 'top10senhasfodas'
-app.config['UPLOAD_FOLDER'] = './static/Imagens'
+def base64_to_image(base64_string, output_path):
+    base64_data = base64_string.split(',')[1]
+    image_data = base64.b64decode(base64_data)
+
+    with open(output_path, 'wb') as f:
+        f.write(image_data)
+
+pokemons_path = './JSonFiles/pokemons.json'
 
 @app.route('/')
 def index():
@@ -24,6 +35,7 @@ def pokemon():
 @app.route('/criar_pokemon', methods=['GET', 'POST'])
 def criar_pokemon():
     form = CadastroPokemon()
+    form.tipo.choices = [(tipo.TypeID, tipo.TypeDescription) for tipo in type.query.all()]
     if form.validate_on_submit():
         pokemons = Load_Jsons(pokemons_path)
         pokemon_solo = {
@@ -40,17 +52,20 @@ def criar_pokemon():
     
     return render_template('criacao.html', title='Criação',form=form)
 
-
-def base64_to_image(base64_string, output_path):
-    base64_data = base64_string.split(',')[1]
-    image_data = base64.b64decode(base64_data)
-
-    with open(output_path, 'wb') as f:
-        f.write(image_data)
-
 @app.route('/pokemon_data')
 def pokemon_data():
-    return send_file(pokemons_path, mimetype='application/json')
+    pokemons = poke.query.all()
+    pokemon_data = {
+        'pokemons': [
+            {
+                'id': pokemon.PokemonID,
+                'name': pokemon.PokemonName,
+                'Imagem': pokemon.PokemonImage
+            }
+            for pokemon in pokemons
+        ]
+    }
+    return jsonify(pokemon_data)
 
 @app.route('/pokemon_data/<id>')
 def pokemon_data_item(id):
@@ -59,7 +74,6 @@ def pokemon_data_item(id):
         if pokemon_item['id'] == int(id):
             return jsonify(pokemon_item=pokemon_item)
             
-
 
 if __name__ == '__main__':
     app.run(debug=True)
