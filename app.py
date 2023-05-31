@@ -1,3 +1,4 @@
+from control.POSTPokemon import SalvarPokemon
 from flask import Flask, render_template, jsonify, request, send_file, url_for, redirect
 from forms import CadastroPokemon
 from models import db, type, pokemon as poke
@@ -5,7 +6,7 @@ import json
 import base64
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://joao:joao123@127.0.0.1:3306/PokemonSite'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://uvvp03qrxb766qoc:HcvkJP3kEvL4bJCkZ0TY@bgbgdk5d0uglfiuiprtq-mysql.services.clever-cloud.com:3306/bgbgdk5d0uglfiuiprtq'
 app.config['SECRET_KEY'] = 'top10senhasfodas'
 app.config['UPLOAD_FOLDER'] = './static/Imagens'
 
@@ -36,18 +37,19 @@ def pokemon():
 def criar_pokemon():
     form = CadastroPokemon()
     form.tipo.choices = [(tipo.TypeID, tipo.TypeDescription) for tipo in type.query.all()]
-    if form.validate_on_submit():
-        pokemons = Load_Jsons(pokemons_path)
-        pokemon_solo = {
-            "id"  : len(pokemons['pokemons']) + 1,
-            "name": form.nome.data,
-            "Imagem": './static/Imagens/'+ form.nome.data + '.png',
-            "types": form.tipo.data
-        }
-        pokemons['pokemons'].append(pokemon_solo)
-        with open(pokemons_path,'w') as f:
-            f.write(json.dumps(pokemons, indent=4))
-        base64_to_image(form.imagem.data, './static/Imagens/'+ form.nome.data + '.png')
+    if request.method == 'POST':
+        SalvarPokemon(repr(form))
+        # pokemons = Load_Jsons(pokemons_path)
+        # pokemon_solo = {
+        #     "id"  : len(pokemons['pokemons']) + 1,
+        #     "name": form.nome.data,
+        #     "Imagem": './static/Imagens/'+ form.nome.data + '.png',
+        #     "types": form.tipo.data
+        # }
+        # pokemons['pokemons'].append(pokemon_solo)
+        # with open(pokemons_path,'w') as f:
+        #     f.write(json.dumps(pokemons, indent=4))
+        # base64_to_image(form.imagem.data, './static/Imagens/'+ form.nome.data + '.png')
         return redirect(url_for('index'))
     
     return render_template('criacao.html', title='Criação',form=form)
