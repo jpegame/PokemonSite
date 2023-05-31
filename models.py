@@ -1,9 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-# from flask import Flask
 
-# app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://joao:joao123@127.0.0.1:3306/PokemonSite'
-# db = SQLAlchemy()
 db = SQLAlchemy()
 
 class user(db.Model):
@@ -25,8 +21,3 @@ class pokemon(db.Model):
 class type(db.Model):
     TypeID = db.Column(db.Integer, primary_key=True)
     TypeDescription = db.Column(db.String(40), unique=True)
-
-if __name__ == '__main__':
-    pass
-    # with app.app_context():
-    #     db.create_all()
