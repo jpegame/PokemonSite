@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    @keyframes gradientAnimation {
+        0% { background-position: 75%}
+        50% { background-position: 25%}
+        100% { background-position: 75%}
+    }
+
+    .foil-background {
+        position: relative;
+        padding: 20px;
+        color: white;
+        background: linear-gradient(135deg, #cc00ff, #0077ff);
+        background-size: 200% 200%;
+        animation: gradientAnimation 4s ease-in-out infinite;
+    }
+
+    .mitical-background {
+        position: relative;
+        padding: 20px;
+        color: white;
+        background: linear-gradient(135deg, #ff0055, #0077ff);
+        background-size: 200% 200%;
+        animation: gradientAnimation 4s ease-in-out infinite; 
+    }
+
+    h1, p {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+
+    </style>
+</head>
+<body>
+    <div class="foil-background">
+        <h1>Foil Background Effect</h1>
+        <p>This is some text with a foil background.</p>
+    </div>
+    <div class="mitical-background">
+        <h1>Foil Background Effect</h1>
+        <p>This is some text with a foil background.</p>
+    </div>   
+</body>
+</html>

@@ -21,3 +21,7 @@ class pokemon(db.Model):
 class type(db.Model):
     TypeID = db.Column(db.Integer, primary_key=True)
     TypeDescription = db.Column(db.String(40), unique=True)
+
+class pokemon_special(db.Model):
+    Pokemon_specialID = db.Column(db.Integer, primary_key=True)
+    Pokemon_specialTipo = db.Column(db.String(1))

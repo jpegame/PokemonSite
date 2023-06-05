@@ -1,12 +1,12 @@
 from control.POSTPokemon import SalvarPokemon
 from flask import Flask, render_template, jsonify, request, send_file, url_for, redirect
 from forms import CadastroPokemon
-from models import db, type, pokemon as poke
+from models import db, type, pokemon as poke, pokemon_special
 import json
 import base64
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://uvvp03qrxb766qoc:HcvkJP3kEvL4bJCkZ0TY@bgbgdk5d0uglfiuiprtq-mysql.services.clever-cloud.com:3306/bgbgdk5d0uglfiuiprtq'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://joao:joao123@127.0.0.1:3306/pokemonsite'
 app.config['SECRET_KEY'] = 'top10senhasfodas'
 app.config['UPLOAD_FOLDER'] = './static/Imagens'
 
@@ -15,13 +15,6 @@ db.init_app(app)
 def Load_Jsons(arquivo):
     with open(arquivo,'r') as f:
         return json.load(f)
-
-def base64_to_image(base64_string, output_path):
-    base64_data = base64_string.split(',')[1]
-    image_data = base64.b64decode(base64_data)
-
-    with open(output_path, 'wb') as f:
-        f.write(image_data)
 
 pokemons_path = './JSonFiles/pokemons.json'
 
@@ -39,17 +32,6 @@ def criar_pokemon():
     form.tipo.choices = [(tipo.TypeID, tipo.TypeDescription) for tipo in type.query.all()]
     if request.method == 'POST':
         SalvarPokemon(repr(form))
-        # pokemons = Load_Jsons(pokemons_path)
-        # pokemon_solo = {
-        #     "id"  : len(pokemons['pokemons']) + 1,
-        #     "name": form.nome.data,
-        #     "Imagem": './static/Imagens/'+ form.nome.data + '.png',
-        #     "types": form.tipo.data
-        # }
-        # pokemons['pokemons'].append(pokemon_solo)
-        # with open(pokemons_path,'w') as f:
-        #     f.write(json.dumps(pokemons, indent=4))
-        # base64_to_image(form.imagem.data, './static/Imagens/'+ form.nome.data + '.png')
         return redirect(url_for('index'))
     
     return render_template('criacao.html', title='Criação',form=form)
@@ -68,6 +50,20 @@ def pokemon_data():
         ]
     }
     return jsonify(pokemon_data)
+
+@app.route('/pokemon_special_data')
+def pokemon_special_data():
+    pokemon_specials = pokemon_special.query.all()
+    pokemon_special_data = {
+        'pokemons': [
+            {
+                'id': pokemon_special.Pokemon_specialID,
+                'Classificacao': pokemon_special.Pokemon_specialTipo
+            }
+            for pokemon_special in pokemon_specials
+        ]
+    }
+    return jsonify(pokemon_special_data)
 
 @app.route('/pokemon_data/<id>')
 def pokemon_data_item(id):

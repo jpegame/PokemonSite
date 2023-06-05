@@ -1,0 +1,69 @@
+144 || articuno|| L
+145 || zapdos|| L
+146 || moltres|| L
+150 || mewtwo|| L
+151||mew|| M
+243 || raikou|| L
+244 || entei|| L
+245 || suicune|| L
+249 || lugia|| L
+250 || ho-oh|| L
+251||celebi|| M
+377 || regirock|| L
+378 || regice|| L
+379 || registeel|| L
+380 || latias|| L
+381 || latios|| L
+382 || kyogre|| L
+383 || groudon|| L
+384 || rayquaza|| L
+385||jirachi|| M
+386||deoxys|| M
+480 || uxie|| L
+481 || mesprit|| L
+482 || azelf|| L
+483 || dialga|| L
+484 || palkia|| L
+485 || heatran|| L
+486 || regigigas|| L
+487 || giratina|| L
+488 || cresselia|| L
+489||phione|| M
+490||manaphy|| M
+491||darkrai|| M
+492||shaymin|| M
+493||arceus|| M
+494||victini|| M
+638 || cobalion|| L
+639 || terrakion|| L
+640 || virizion|| L
+641 || tornadus|| L
+642 || thundurus|| L
+643 || reshiram|| L
+644 || zekrom|| L
+645 || landorus|| L
+646 || kyurem|| L
+647||keldeo|| M
+648||meloetta|| M
+649||genesect|| M
+716 || xerneas|| L
+717 || yveltal|| L
+718 || zygarde|| L
+719||diancie|| M
+720||hoopa|| M
+721||volcanion|| M
+773 || silvally|| L
+785 || tapu-koko|| L
+786 || tapu-lele|| L
+787 || tapu-bulu|| L
+788 || tapu-fini|| L
+789 || cosmog|| L
+790 || cosmoem|| L
+791 || solgaleo|| L
+792 || lunala|| L
+800 || necrozma|| L
+801||magearna|| M
+802||marshadow|| M
+807||zeraora|| M
+808||meltan|| M
+809||melmetal|| M

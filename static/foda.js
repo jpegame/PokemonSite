@@ -45,6 +45,25 @@ if (pokemonid < 400000){
             console.log(error);
         }
     });
+    $.ajax({
+        url: 'https://pokeapi.co/api/v2/pokemon-species/' + pokemonid,
+        dataType: 'json',
+        success: function(response) {
+            let FoundLendario   = response['pokemons'].some(obj => JSON.stringify(obj) === JSON.stringify(JSON.parse('{"Classificacao": "L","id":' + pokemonid + '}')));
+            let FoundMitico     = response['pokemons'].some(obj => JSON.stringify(obj) === JSON.stringify(JSON.parse('{"Classificacao": "M","id":' + pokemonid + '}')));
+    
+            if (FoundLendario){
+                pokemon.style.background = 'linear-gradient(180deg, #cc00ff, rgb(106, 180, 245))'
+            }
+            if (FoundMitico){
+                pokemon.style.background = 'linear-gradient(180deg, #ff0055, #cc00ff)'
+            }
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+
 } else {
     $.ajax({
         url: '/pokemon_data/' + (Number(pokemonid) - 400000).toString(),
