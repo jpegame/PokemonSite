@@ -33,17 +33,27 @@ from flask_sqlalchemy import SQLAlchemy
 import json
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://joao:joao123@127.0.0.1:3306/pokemonsite'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://aluno:aluno123@127.0.0.1:3306/pokemonsite'
 db.init_app(app)
-
-
-f = open('testas.txt','r')
-lista = f.readlines()
-for l in lista:
-    l = l.replace("\n","")
-    pokemon_lista = l.split('||')
-
+tipos = ["Normal","Fire","Water","Grass","Flying","Fighting","Poison","Electric","Ground","Rock","Psychic","Ice","Bug","Ghost","Steel","Dragon","Dark","Fairy"]
+new_type = pokemon(PokemonName='testasfoda',PokemonImage='./static/Imagens/testasfoda.png')
+for tipo in tipos:
     with app.app_context():
-        new_type = pokemon_special(Pokemon_specialID=int(pokemon_lista[0]),Pokemon_specialTipo=pokemon_lista[2].replace(" ", ""))
+        new_type = tipo_pokemon(TypeDescription=tipo)
         db.session.add(new_type)
         db.session.commit()
+
+
+# with app.app_context():
+#     db.create_all()
+
+# f = open('testas.txt','r')
+# lista = f.readlines()
+# for l in lista:
+#     l = l.replace("\n","")
+#     pokemon_lista = l.split('||')
+
+#     with app.app_context():
+#         new_type = pokemon_special(Pokemon_specialID=int(pokemon_lista[0]),Pokemon_specialTipo=pokemon_lista[2].replace(" ", ""))
+#         db.session.add(new_type)
+#         db.session.commit()

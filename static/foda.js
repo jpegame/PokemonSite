@@ -16,6 +16,7 @@ const pokemon_normal    = document.getElementById('pokemon_normal');
 const pokemon_shiny     = document.getElementById('pokemon_shiny');
 const gif_normal        = document.getElementById('gif_normal');
 const gif_shiny         = document.getElementById('gif_shiny');
+const pokemon           = document.querySelector(".pokemon");
 
 pokemonid = GetURLParameter('pokemon')
 if (pokemonid < 400000){
@@ -46,7 +47,7 @@ if (pokemonid < 400000){
         }
     });
     $.ajax({
-        url: 'https://pokeapi.co/api/v2/pokemon-species/' + pokemonid,
+        url: '/pokemon_special_data',
         dataType: 'json',
         success: function(response) {
             let FoundLendario   = response['pokemons'].some(obj => JSON.stringify(obj) === JSON.stringify(JSON.parse('{"Classificacao": "L","id":' + pokemonid + '}')));
@@ -79,9 +80,11 @@ if (pokemonid < 400000){
 }
 
 function LoadPokemons(pokemon){
+    document.getElementById('imagens_checkbox').style = 'visibility:hidden;'
     document.getElementById('nome_pokemon').innerHTML = pokemon.pokemon_item.name
+    pokemon_normal.src = pokemon.pokemon_item.imagem
     let i =0;
-    for (let tipo of pokemon.pokemon_item.types) {
+    for (let tipo of pokemon.pokemon_item.tipos) {
         tipo_pokemon = document.createElement('h2')
         tipo_pokemon.innerHTML = tipo.toLowerCase()
         tipo_pokemon.classList.add(tipo.toLowerCase())

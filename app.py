@@ -6,7 +6,7 @@ import json
 import base64
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://joao:joao123@127.0.0.1:3306/pokemonsite'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://aluno:aluno123@127.0.0.1:3306/pokemonsite'
 app.config['SECRET_KEY'] = 'top10senhasfodas'
 app.config['UPLOAD_FOLDER'] = './static/Imagens'
 
@@ -44,12 +44,28 @@ def pokemon_data():
             {
                 'id': pokemon.PokemonID,
                 'name': pokemon.PokemonName,
-                'Imagem': pokemon.PokemonImage
+                'Imagem': pokemon.PokemonImage,
+                # 'tipos': pokemon.type
             }
             for pokemon in pokemons
         ]
     }
+    print(pokemon_data)
     return jsonify(pokemon_data)
+
+@app.route('/pokemon_data/<id>')
+def pokemon_data_item(id):
+    pokemon = db.session.get(poke, id)
+    pokemon_data = {
+        'id'    : pokemon.PokemonID,
+        'name'  : pokemon.PokemonName,
+        'imagem': pokemon.PokemonImage,
+        'tipos':[
+            tipo.TypeDescription
+            for tipo in pokemon.type
+        ]
+    }
+    return jsonify(pokemon_item=pokemon_data)
 
 @app.route('/pokemon_special_data')
 def pokemon_special_data():
@@ -64,14 +80,6 @@ def pokemon_special_data():
         ]
     }
     return jsonify(pokemon_special_data)
-
-@app.route('/pokemon_data/<id>')
-def pokemon_data_item(id):
-    pokemons = Load_Jsons(pokemons_path)
-    for pokemon_item in pokemons['pokemons']:
-        if pokemon_item['id'] == int(id):
-            return jsonify(pokemon_item=pokemon_item)
             
-
 if __name__ == '__main__':
     app.run(debug=True)
